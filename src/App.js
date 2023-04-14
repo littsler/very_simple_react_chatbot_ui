@@ -72,6 +72,14 @@ class ChatBot extends React.Component {
     });
   };
 
+  handleCleanHistory = (event) => {
+    this.setState(
+      {
+        messages: []
+      }
+    );
+  };
+
   render() {
     return (
       <div className="chatbot">
@@ -94,9 +102,12 @@ class ChatBot extends React.Component {
             placeholder="Type your message here..."
             autoFocus
           />
-          <button type="submit">发送</button>
+          <div class="button-container">
+            <button type="submit">发送</button>
+            <button type="button" onClick={() => downloadCSV(this.state.messages)}>导出聊天记录到CSV文件</button>
+            <button type="button" onClick={this.handleCleanHistory}>清除聊天记录</button>
+          </div>
         </form>
-        <div><button onClick={() => downloadCSV(this.state.messages)}>导出聊天记录到CSV文件</button></div>
       </div>
     );
   }
